@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Models\User;
+use App\Models\Payment;
+
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('users', 'UserController@getAllUsers');
+Route::get('payments', 'PaymentController@getAllPayments');
+
+Route::post('user', [UserController::class, 'createUser']);
+Route::post('payment', [PaymentController::class, 'createPayment']);

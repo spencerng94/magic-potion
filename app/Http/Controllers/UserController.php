@@ -12,9 +12,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllUsers()
     {
-        $data = Data::all();
+        $users = User::all();
         return response()->json($data);
     }
 
@@ -23,9 +23,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createUser(Request $request)
     {
-        //
+        $user = new User;
+        $user->id = $request->id;
+        $user->email = $request->email;
+        $user->quantity = $request->quantity;
+        $user->total = $request->total;
+        $user->save();
+
+        return response()->json([
+            "message" => "user record created"
+        ], 201);
     }
 
     /**
@@ -36,7 +45,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return User::create($request->all());
     }
 
     /**

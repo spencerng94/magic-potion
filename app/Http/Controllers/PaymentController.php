@@ -12,9 +12,10 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllPayments()
     {
-        //
+        $payments = Payment::all();
+        return response($bank, 200);
     }
 
     /**
@@ -22,9 +23,18 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createPayment(Request $request)
     {
-        //
+        $payment = new Payment;
+        $payment->id = $request->id;
+        $payment->user_id = $request->user_id;
+        $payment->ccNum = $request->ccNum;
+        $payment->exp = $request->exp;
+        $payment->save();
+
+        return response()->json([
+            "message" => "payment record created"
+        ], 201);
     }
 
     /**
@@ -35,7 +45,7 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Payment::create($request->all());
     }
 
     /**
