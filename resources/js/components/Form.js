@@ -11,11 +11,19 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+<<<<<<< HEAD
             quantity: 0,
             total: 0,
             email: '',
             ccNum: '',
             exp: ''
+=======
+            quantity = 0,
+            total = 0,
+            email = '',
+            ccNum = '',
+            exp = ''
+>>>>>>> 5f2c3db8d6ebbda03be045eae39d4fe53ca5f379
         }
     }
 
