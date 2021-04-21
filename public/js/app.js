@@ -98,7 +98,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Contact = function Contact() {
+var Contact = function Contact(props) {
+  var email = props.email,
+      handleEmailChange = props.handleEmailChange;
+  console.log(email, 'line 7');
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "section-title",
@@ -110,6 +113,8 @@ var Contact = function Contact() {
       type: "text",
       id: "fname",
       name: "firstname",
+      onChange: handleEmailChange,
+      value: email,
       placeholder: "Email Address"
     })]
   });
@@ -217,9 +222,11 @@ var Form = /*#__PURE__*/function (_React$Component) {
       total: '',
       email: '',
       ccNum: '',
-      exp: ''
+      exp: '',
+      validEmail: false
     };
     _this.handleQuantityChange = _this.handleQuantityChange.bind(_assertThisInitialized(_this));
+    _this.handleEmailChange = _this.handleEmailChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -237,6 +244,24 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "handleEmailChange",
+    value: function handleEmailChange(event) {
+      var regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
+      console.log(regex, 'line 38');
+
+      if (regex) {
+        this.setState({
+          email: event.target.value,
+          validEmail: true
+        });
+      } else {
+        this.setState({
+          validEmail: false
+        });
+      } // alert('Error: Please type in a valid email address.');
+
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -252,7 +277,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Contact__WEBPACK_IMPORTED_MODULE_5__.default, {})
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Contact__WEBPACK_IMPORTED_MODULE_5__.default, {
+            email: this.state.email,
+            handleEmailChange: this.handleEmailChange
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {

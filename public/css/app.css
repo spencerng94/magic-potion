@@ -97,6 +97,15 @@ input[type=text] {
     border-color: 0.35em #E0E0E0;
 }
 
+input[type=email] {
+    width: 100%;
+    padding: 14px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    /* border: 2px #C8C8C8; */
+    border-color: 0.35em #E0E0E0;
+}
+
 input[type=month] {
     width: 45%;
     padding: 14px 20px;

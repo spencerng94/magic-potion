@@ -15,9 +15,11 @@ class Form extends React.Component {
             total: '',
             email: '',
             ccNum: '',
-            exp: ''
+            exp: '',
+            validEmail: false
         }
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
     }
 
     handleQuantityChange(event) {
@@ -32,13 +34,29 @@ class Form extends React.Component {
         }
     }
 
+    handleEmailChange(event) {
+        let regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
+        console.log(regex, 'line 38');
+        if (regex) {
+            this.setState({
+                email: event.target.value, 
+                validEmail: true
+            })
+        } else {
+            this.setState({
+                validEmail: false
+            })
+        }
+        // alert('Error: Please type in a valid email address.');
+    }
+
     render() {
         return (
             <div className="master-container">
                 <div><Header /></div>
                 <div><Order quantity={this.state.quantity} total={this.state.total} handleQuantityChange={this.handleQuantityChange}/></div>
                 <div><Divider /></div>
-                <div><Contact /></div>
+                <div><Contact email={this.state.email} handleEmailChange={this.handleEmailChange}/></div>
                 <div><Divider /></div>
                 <div><Billing /></div>
                 <div><Divider /></div>
