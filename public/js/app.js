@@ -370,6 +370,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Submit = function Submit() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "button-container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
       type: "button",
       children: "PLACE YOUR ORDER"

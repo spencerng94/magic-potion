@@ -3,7 +3,7 @@ import React from 'react';
 const Submit = () => {
 
     return(
-        <div>
+        <div className="button-container">
             <button type="button">PLACE YOUR ORDER</button>
         </div>
     )

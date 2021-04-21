@@ -18,7 +18,7 @@ hr{
 
 
 .master-container {
-    width: 35%;
+    width: 30%;
     padding-left: 50px;
     padding-right: 50px;
     display: block;
@@ -28,6 +28,10 @@ hr{
 
 .billing-details-container {
     display: flex;
+}
+
+.button-container {
+    padding-bottom: 30px;
 }
 
 .credit-card-container {
@@ -81,20 +85,21 @@ hr{
 .section-title {
     font-size: 1.20em;
     font-weight: bold;
-    padding-bottom: 30px;
+    padding-bottom: 1.8em;
 }
 
 input[type=text] {
     width: 100%;
-    padding: 12px 12px;
+    padding: 14px 12px;
     margin: 8px 0;
     box-sizing: border-box;
-    
+    /* border: 2px #C8C8C8; */
+    border-color: 0.35em #E0E0E0;
 }
 
 input[type=month] {
     width: 45%;
-    padding: 12px 20px;
+    padding: 14px 20px;
     margin: 8px 0;
     box-sizing: border-box;
 }
@@ -139,8 +144,8 @@ button {
 }
 
 .divider {
-    padding-top: 12px;
-    padding-bottom: 25px;
+    padding-top: 1.0em;
+    padding-bottom: 2.0em;
     color: #DCDCDC;
 }
 
