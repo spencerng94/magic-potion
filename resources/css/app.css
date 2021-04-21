@@ -1,0 +1,19 @@
+body {
+    font-family: Arial
+}
+  
+h1 {
+
+}
+
+.form-title {
+    font-size: ;
+    text-align: center;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}

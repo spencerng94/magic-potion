@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('user_id');
             $table->string('ccNum');
             $table->string('exp');
-            $table->foreign('user_id')->references('payment_id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
