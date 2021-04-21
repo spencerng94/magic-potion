@@ -21,7 +21,7 @@ class Form extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="master-container">
                 <div><Header /></div>
                 <div><Order /></div>
                 <div><Divider /></div>

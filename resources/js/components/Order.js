@@ -4,9 +4,17 @@ const Order = () => {
 
     return (
         <div>
-            <div>Your Order</div>
-            <div>Quantity Placeholder</div>
-            <div>Total Price Placeholder</div>
+            <div className="section-title">Your Order</div>
+            <div className="order-details-container">
+                <div className="quantity-container">
+                    <div className="input-label">Qty</div>
+                    <input type="text" id="fname" name="firstname" placeholder="Max 3"></input>
+                </div>
+                <div className="price-container">
+                    <div className="input-label">Total Price</div>
+                    <input type="text" id="fname" name="firstname" placeholder="0.00"></input>
+                </div>
+            </div>
         </div>
     )
 }

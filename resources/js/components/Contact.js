@@ -4,8 +4,9 @@ const Contact = () => {
 
     return (
         <div>
-            <div>Contact</div>
-            <div>Email Placeholder</div>
+            <div className="section-title">Contact</div>
+            <div className="input-label">Email Address</div>
+            <input type="text" id="fname" name="firstname" placeholder="Email Address"></input>
         </div>
     )
 }

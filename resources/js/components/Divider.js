@@ -3,7 +3,7 @@ import React from 'react';
 const Divider = () => {
 
     return (
-        <div>
+        <div className="divider">
             <hr class="solid"></hr>
         </div>
     )

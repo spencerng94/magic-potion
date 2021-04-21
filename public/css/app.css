@@ -1,2 +1,121 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
+body {
+    font-family: Arial;
+}
+  
+h1 {
+
+}
+
+.master-container {
+    width: 35%;
+    border: 1px solid green;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+.billing-details-container {
+    display: flex;
+}
+
+.credit-card-container {
+    flex: 1;
+    margin-right: 0.6em;
+}
+
+.expiration-container {
+    flex: 1;
+    margin-left: 0.6em;
+    width: 40%;
+}
+
+.order-details-container {
+    display: flex;
+    /* justify-content: center; */
+}
+
+.image-container {
+    padding-bottom: 40px;
+}
+
+.quantity-container {
+    flex: 1;
+    margin-right: 0.6em;
+}
+
+.price-container {
+    flex: 1;
+    margin-left: 0.6em;
+}
+
+.potion-photo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.form-title {
+    /* font-size: 32px; */
+    font-size: 2.60em;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 25px;
+    padding-bottom: 30px;
+}
+
+
+.section-title {
+    font-size: 1.50em;
+    font-weight: bold;
+    padding-bottom: 30px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=month] {
+    width: 45%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.input-label {
+    font-size: 0.70em;
+    color: gray;
+}
+
+input.expiration-input {
+    width: 45%;
+}
+
+button {
+    background-color: #2b605b;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    padding: 15px 32px;
+    font-size: 0.65em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.divider {
+    padding-bottom: 30px;
+}
+
+.expiration-input {
+    
+}
