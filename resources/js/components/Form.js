@@ -24,6 +24,7 @@ class Form extends React.Component {
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleCreditCardChange = this.handleCreditCardChange.bind(this);
         this.handleExpirationChange = this.handleExpirationChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleQuantityChange(event) {
@@ -79,16 +80,18 @@ class Form extends React.Component {
     }
 
     handleSubmit(event) {
-        // event.preventDefault();
+        console.log('line 83')
+        event.preventDefault();
 
-        // let userObject = {
-        //     id: 1,
-        //     quantity: this.state.quantity,
-        //     total: this.state.total,
-        //     email: this.state.email,
-        //     ccNum: this.state.ccNum,
-        //     exp: this.state.exp
-        // }
+        let payload = {
+            email: this.state.email,
+            quantity: this.state.quantity,
+            total: this.state.total,
+            payment: {
+                ccNum: this.state.ccNum,
+                exp: this.state.exp
+            }
+        }
 
         // axios.post('http://localhost:8000/api/user')
 
@@ -104,7 +107,7 @@ class Form extends React.Component {
                 <div><Divider /></div>
                 <div><Billing ccNum={this.state.ccNum} handleCreditCardChange={this.handleCreditCardChange} exp={this.state.exp} handleExpirationChange={this.handleExpirationChange} dateSlash={this.state.dateSlash}/></div>
                 <div><Divider /></div>
-                <div><Submit state={this.state}/></div>
+                <div><Submit state={this.state} handleSubmit={this.handleSubmit}/></div>
             </div>
         );
     }

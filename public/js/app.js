@@ -2075,6 +2075,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
     _this.handleEmailChange = _this.handleEmailChange.bind(_assertThisInitialized(_this));
     _this.handleCreditCardChange = _this.handleCreditCardChange.bind(_assertThisInitialized(_this));
     _this.handleExpirationChange = _this.handleExpirationChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2136,16 +2137,18 @@ var Form = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleSubmit",
-    value: function handleSubmit(event) {// event.preventDefault();
-      // let userObject = {
-      //     id: 1,
-      //     quantity: this.state.quantity,
-      //     total: this.state.total,
-      //     email: this.state.email,
-      //     ccNum: this.state.ccNum,
-      //     exp: this.state.exp
-      // }
-      // axios.post('http://localhost:8000/api/user')
+    value: function handleSubmit(event) {
+      console.log('line 83');
+      event.preventDefault();
+      var payload = {
+        email: this.state.email,
+        quantity: this.state.quantity,
+        total: this.state.total,
+        payment: {
+          ccNum: this.state.ccNum,
+          exp: this.state.exp
+        }
+      }; // axios.post('http://localhost:8000/api/user')
     }
   }, {
     key: "render",
@@ -2181,7 +2184,8 @@ var Form = /*#__PURE__*/function (_React$Component) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Submit__WEBPACK_IMPORTED_MODULE_7__.default, {
-            state: this.state
+            state: this.state,
+            handleSubmit: this.handleSubmit
           })
         })]
       });
@@ -2315,11 +2319,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Submit = function Submit(props) {
-  var state = props.state;
-  console.log(state, 'line 6');
+  var handleSubmit = props.handleSubmit;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "button-container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      onClick: handleSubmit,
       type: "button",
       children: "PLACE YOUR ORDER"
     })
