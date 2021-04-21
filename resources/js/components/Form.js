@@ -11,11 +11,24 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            quantity: 0,
-            total: 0,
+            quantity: '',
+            total: '',
             email: '',
             ccNum: '',
             exp: ''
+        }
+        this.handleQuantityChange = this.handleQuantityChange.bind(this);
+    }
+
+    handleQuantityChange(event) {
+        if (event.target.value > 3) {
+            alert('Error: Maximum of 3 potions allowed for each purchase.');
+        } else {
+            let currentTotal = event.target.value * 49.99;
+            this.setState({
+                quantity: event.target.value,
+                total: currentTotal
+            });
         }
     }
 
@@ -23,7 +36,7 @@ class Form extends React.Component {
         return (
             <div className="master-container">
                 <div><Header /></div>
-                <div><Order /></div>
+                <div><Order quantity={this.state.quantity} total={this.state.total} handleQuantityChange={this.handleQuantityChange}/></div>
                 <div><Divider /></div>
                 <div><Contact /></div>
                 <div><Divider /></div>

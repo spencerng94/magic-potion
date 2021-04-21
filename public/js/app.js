@@ -213,16 +213,30 @@ var Form = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      quantity: 0,
-      total: 0,
+      quantity: '',
+      total: '',
       email: '',
       ccNum: '',
       exp: ''
     };
+    _this.handleQuantityChange = _this.handleQuantityChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Form, [{
+    key: "handleQuantityChange",
+    value: function handleQuantityChange(event) {
+      if (event.target.value > 3) {
+        alert('Error: Maximum of 3 potions allowed for each purchase.');
+      } else {
+        var currentTotal = event.target.value * 49.99;
+        this.setState({
+          quantity: event.target.value,
+          total: currentTotal
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -230,7 +244,11 @@ var Form = /*#__PURE__*/function (_React$Component) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_2__.default, {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Order__WEBPACK_IMPORTED_MODULE_3__.default, {})
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Order__WEBPACK_IMPORTED_MODULE_3__.default, {
+            quantity: this.state.quantity,
+            total: this.state.total,
+            handleQuantityChange: this.handleQuantityChange
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
@@ -312,7 +330,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Order = function Order() {
+var Order = function Order(props) {
+  var handleQuantityChange = props.handleQuantityChange,
+      quantity = props.quantity,
+      total = props.total;
+  console.log(quantity, 'line 6');
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "section-title",
@@ -328,6 +350,8 @@ var Order = function Order() {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
+          value: quantity,
+          onChange: handleQuantityChange,
           id: "fname",
           name: "firstname",
           placeholder: "Max 3"
@@ -339,6 +363,7 @@ var Order = function Order() {
           children: "Total Price"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
+          value: total,
           id: "fname",
           name: "firstname",
           placeholder: "0.00"
