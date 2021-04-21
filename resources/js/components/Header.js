@@ -4,11 +4,7 @@ const Header = () => {
 
     return (
         <div>
-<<<<<<< HEAD
             <div className="form-title">
-=======
-            <div>
->>>>>>> 5f2c3db8d6ebbda03be045eae39d4fe53ca5f379
                 Magic Potion #1
             </div>
             <div>
