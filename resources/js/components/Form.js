@@ -11,11 +11,11 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            quantity = 0,
-            total = 0,
-            email = '',
-            ccNum = '',
-            exp = ''
+            quantity: 0,
+            total: 0,
+            email: '',
+            ccNum: '',
+            exp: ''
         }
     }
 
