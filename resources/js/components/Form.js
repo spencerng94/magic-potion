@@ -6,6 +6,7 @@ import Divider from './Divider';
 import Contact from './Contact';
 import Billing from './Billing';
 import Submit from './Submit';
+import axios from 'axios';
 
 class Form extends React.Component {
     constructor(props) {
@@ -16,10 +17,13 @@ class Form extends React.Component {
             email: '',
             ccNum: '',
             exp: '',
-            validEmail: false
+            validEmail: false,
+            dateSlash: false
         }
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handleCreditCardChange = this.handleCreditCardChange.bind(this);
+        this.handleExpirationChange = this.handleExpirationChange.bind(this);
     }
 
     handleQuantityChange(event) {
@@ -34,6 +38,31 @@ class Form extends React.Component {
         }
     }
 
+    handleCreditCardChange(event) {
+        this.setState({
+            ccNum: event.target.value
+        })
+    }
+
+    handleExpirationChange(event) {
+        const val = event.target.value;
+        let currentLength = val.length;
+
+        if (currentLength === 3 && !this.state.dateSlash && !val.includes('/')) {
+            const dateWithSlash = val.substring(0, 2) + '/' + val.substring(2, 4);
+            this.setState({
+                exp: dateWithSlash,
+                dateSlash: true
+            })
+        } else {
+            this.setState({
+                exp: event.target.value,
+                dateSlash: false
+            })
+        }
+    }
+
+
     handleEmailChange(event) {
         let regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
         console.log(regex, 'line 38');
@@ -47,7 +76,22 @@ class Form extends React.Component {
                 validEmail: false
             })
         }
-        // alert('Error: Please type in a valid email address.');
+    }
+
+    handleSubmit(event) {
+        // event.preventDefault();
+
+        // let userObject = {
+        //     id: 1,
+        //     quantity: this.state.quantity,
+        //     total: this.state.total,
+        //     email: this.state.email,
+        //     ccNum: this.state.ccNum,
+        //     exp: this.state.exp
+        // }
+
+        // axios.post('http://localhost:8000/api/user')
+
     }
 
     render() {
@@ -58,9 +102,9 @@ class Form extends React.Component {
                 <div><Divider /></div>
                 <div><Contact email={this.state.email} handleEmailChange={this.handleEmailChange}/></div>
                 <div><Divider /></div>
-                <div><Billing /></div>
+                <div><Billing ccNum={this.state.ccNum} handleCreditCardChange={this.handleCreditCardChange} exp={this.state.exp} handleExpirationChange={this.handleExpirationChange} dateSlash={this.state.dateSlash}/></div>
                 <div><Divider /></div>
-                <div><Submit /></div>
+                <div><Submit state={this.state}/></div>
             </div>
         );
     }

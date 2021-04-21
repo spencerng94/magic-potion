@@ -1,6 +1,9 @@
 import React from 'react';
 
-const Submit = () => {
+const Submit = (props) => {
+    let { state } = props;
+
+    console.log(state, 'line 6')
 
     return(
         <div className="button-container">

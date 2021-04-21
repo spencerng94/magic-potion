@@ -3,8 +3,6 @@ import React from 'react';
 const Order = (props) => {
     let { handleQuantityChange, quantity, total } = props;
 
-    console.log(quantity, 'line 6')
-
     return (
         <div>
             <div className="section-title">Your Order</div>
