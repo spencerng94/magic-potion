@@ -8,9 +8,17 @@ h1 {
 
 }
 
+hr{
+    border:0;
+    margin:0;
+    width:100%;
+    height:2px;
+    background:#EBEAEB;
+}
+
+
 .master-container {
     width: 35%;
-    border: 1px solid green;
     padding-left: 50px;
     padding-right: 50px;
     display: block;
@@ -62,7 +70,7 @@ h1 {
 
 .form-title {
     /* font-size: 32px; */
-    font-size: 2.60em;
+    font-size: 2.00em;
     text-align: center;
     font-weight: bold;
     padding-top: 25px;
@@ -71,16 +79,17 @@ h1 {
 
 
 .section-title {
-    font-size: 1.50em;
+    font-size: 1.20em;
     font-weight: bold;
     padding-bottom: 30px;
 }
 
 input[type=text] {
     width: 100%;
-    padding: 12px 20px;
+    padding: 12px 12px;
     margin: 8px 0;
     box-sizing: border-box;
+    
 }
 
 input[type=month] {
@@ -99,6 +108,23 @@ input.expiration-input {
     width: 45%;
 }
 
+.quantity-label {
+    font-size: 0.70em;
+    color: gray;
+    unicode-bidi:bidi-override;
+}
+
+.quantity-label span {
+    color: red;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+    font-weight: lighter;
+    font-size: 0.90em;
+}
+
 button {
     background-color: #2b605b;
     border: none;
@@ -113,7 +139,9 @@ button {
 }
 
 .divider {
-    padding-bottom: 30px;
+    padding-top: 12px;
+    padding-bottom: 25px;
+    color: #DCDCDC;
 }
 
 .expiration-input {

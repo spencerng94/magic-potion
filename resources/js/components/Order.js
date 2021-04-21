@@ -7,7 +7,7 @@ const Order = () => {
             <div className="section-title">Your Order</div>
             <div className="order-details-container">
                 <div className="quantity-container">
-                    <div className="input-label">Qty</div>
+                    <div className="quantity-label">Qty<span>*</span></div>
                     <input type="text" id="fname" name="firstname" placeholder="Max 3"></input>
                 </div>
                 <div className="price-container">
