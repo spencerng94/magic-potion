@@ -2024,9 +2024,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Contact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Contact */ "./resources/js/components/Contact.js");
 /* harmony import */ var _Billing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Billing */ "./resources/js/components/Billing.js");
 /* harmony import */ var _Submit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Submit */ "./resources/js/components/Submit.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _FormErrors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormErrors */ "./resources/js/components/FormErrors.js");
+/* harmony import */ var _FormSuccess__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormSuccess */ "./resources/js/components/FormSuccess.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2048,6 +2050,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -2085,7 +2089,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
         validEmail: false,
         validCcNum: false,
         validExp: false
-      }
+      },
+      showErrors: '',
+      showSuccess: ''
     };
     _this.handleQuantityChange = _this.handleQuantityChange.bind(_assertThisInitialized(_this));
     _this.handleEmailChange = _this.handleEmailChange.bind(_assertThisInitialized(_this));
@@ -2159,6 +2165,8 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
+      var _this2 = this;
+
       event.preventDefault();
       var payload = {
         email: this.state.email,
@@ -2169,15 +2177,53 @@ var Form = /*#__PURE__*/function (_React$Component) {
           exp: this.state.exp
         }
       };
-      console.log(payload, 'line 96');
-      axios__WEBPACK_IMPORTED_MODULE_8___default().post('/api/magic', payload).then(function (response) {
-        console.log(response, 'line 100');
-        return response;
-      })["catch"](function (error) {
-        console.log(error, 'line 103');
-        return error;
-      });
-      console.log(this.state.formErrors, 'line 110');
+      var showErrors = '';
+      var formErrors = this.state.formErrors;
+
+      for (var input in formErrors) {
+        if (formErrors[input] === false) {
+          console.log(formErrors[input], 'line 106');
+          showErrors = true;
+        }
+      }
+
+      console.log(showErrors, 'line 111');
+
+      if (showErrors) {
+        this.setState({
+          showErrors: true
+        }, function () {
+          console.log(_this2.state, 'line 122');
+        });
+      }
+
+      if (!showErrors) {
+        axios__WEBPACK_IMPORTED_MODULE_10___default().post('/api/magic', payload).then(function (res) {
+          console.log('line 103');
+
+          _this2.setState({
+            showSuccess: true,
+            showErrors: false,
+            quantity: '',
+            total: '',
+            email: '',
+            ccNum: '',
+            exp: ''
+          }, function () {
+            console.log(_this2.state, 'line 126');
+          });
+        }) // .then(function (response) {
+        //     console.log(response, 'line 100')
+        //     return this.setState({
+        //         showSuccess: true, 
+        //         showErrors: false
+        //     })
+        // })
+        ["catch"](function (error) {
+          console.log(error, 'line 103');
+          return error;
+        });
+      }
     }
   }, {
     key: "validateField",
@@ -2225,38 +2271,46 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
         className: "master-container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_2__.default, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Order__WEBPACK_IMPORTED_MODULE_3__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_2__.default, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_FormErrors__WEBPACK_IMPORTED_MODULE_8__.default, {
+            formErrors: this.state.formErrors,
+            showErrors: this.state.showErrors
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_FormSuccess__WEBPACK_IMPORTED_MODULE_9__.default, {
+            showSuccess: this.state.showSuccess
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Order__WEBPACK_IMPORTED_MODULE_3__.default, {
             quantity: this.state.quantity,
             total: this.state.total,
             handleQuantityChange: this.handleQuantityChange
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Contact__WEBPACK_IMPORTED_MODULE_5__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Contact__WEBPACK_IMPORTED_MODULE_5__.default, {
             email: this.state.email,
             handleEmailChange: this.handleEmailChange
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Billing__WEBPACK_IMPORTED_MODULE_6__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Billing__WEBPACK_IMPORTED_MODULE_6__.default, {
             ccNum: this.state.ccNum,
             handleCreditCardChange: this.handleCreditCardChange,
             exp: this.state.exp,
             handleExpirationChange: this.handleExpirationChange,
             dateSlash: this.state.dateSlash
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Submit__WEBPACK_IMPORTED_MODULE_7__.default, {
-            state: this.state,
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Divider__WEBPACK_IMPORTED_MODULE_4__.default, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Submit__WEBPACK_IMPORTED_MODULE_7__.default, {
             handleSubmit: this.handleSubmit
           })
         })]
@@ -2270,8 +2324,103 @@ var Form = /*#__PURE__*/function (_React$Component) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Form); // DOM element
 
 if (document.getElementById('form')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(Form, {}), document.getElementById('form'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(Form, {}), document.getElementById('form'));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/FormErrors.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/FormErrors.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var FormErrors = function FormErrors(props) {
+  var formErrors = props.formErrors,
+      showErrors = props.showErrors;
+  var matchObject = {
+    validCcNum: "Credit Card Number",
+    validEmail: "Email Address",
+    validExp: "Credit Card Expiration Date",
+    validQuantity: "Potion Quantity"
+  };
+  console.log(showErrors, 'line 13');
+
+  if (showErrors) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "form-errors",
+      children: Object.keys(formErrors).map(function (fieldName, i) {
+        var currentField = formErrors[fieldName];
+        console.log(fieldName, 'line 20');
+
+        if (currentField === false) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            children: ["Error: Please enter a valid ", matchObject[fieldName], "."]
+          }) // <p key={i}>{fieldName} {formErrors[fieldName]}</p>
+          ;
+        } else {
+          return '';
+        }
+      })
+    });
+  } else {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {});
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormErrors);
+
+/***/ }),
+
+/***/ "./resources/js/components/FormSuccess.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/FormSuccess.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var FormSuccess = function FormSuccess(props) {
+  var showSuccess = props.showSuccess;
+
+  if (showSuccess) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "success-container",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "form-success",
+          children: "Congratulations! Your Order has been placed!"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "success-bottom"
+      })]
+    });
+  } else {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {});
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormSuccess);
 
 /***/ }),
 

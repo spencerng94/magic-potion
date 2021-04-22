@@ -6,6 +6,8 @@ import Divider from './Divider';
 import Contact from './Contact';
 import Billing from './Billing';
 import Submit from './Submit';
+import FormErrors from './FormErrors';
+import FormSuccess from './FormSuccess';
 import axios from 'axios';
 
 class Form extends React.Component {
@@ -20,6 +22,8 @@ class Form extends React.Component {
             validEmail: false,
             dateSlash: false,
             formErrors: {validQuantity: false, validEmail: false, validCcNum: false, validExp: false},
+            showErrors: '',
+            showSuccess: ''
         }
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -71,7 +75,6 @@ class Form extends React.Component {
         this.validateField(field, val);
     }
 
-
     handleEmailChange(event) {
         let field = "email";
         let email = event.target.value;
@@ -95,19 +98,51 @@ class Form extends React.Component {
             }
         }
 
-        console.log(payload, 'line 96')
+        let showErrors = '';
+        let formErrors = this.state.formErrors;
 
-        axios.post('/api/magic', payload)
-            .then(function (response) {
-                console.log(response, 'line 100')
-                return response;
-            })
-            .catch(function (error) {
-                console.log(error, 'line 103')
-                return error;
-            });
+        for (let input in formErrors) {
+            if (formErrors[input] === false) {
+                console.log(formErrors[input], 'line 106')
+                showErrors = true;
+            }
+        }
 
-        console.log(this.state.formErrors, 'line 110')
+        console.log(showErrors, 'line 111')
+
+        if (showErrors) {
+            this.setState({
+                showErrors: true
+            }, () => {console.log(this.state, 'line 122')})
+        }
+
+        if (!showErrors) {
+            axios.post('/api/magic', payload)
+                .then((res) => {
+                    console.log('line 103')
+                    this.setState({
+                        showSuccess: true, 
+                        showErrors: false,
+                        quantity: '',
+                        total: '',
+                        email: '',
+                        ccNum: '',
+                        exp: ''
+                    }, () => {console.log(this.state, 'line 126')})
+                })
+                // .then(function (response) {
+                //     console.log(response, 'line 100')
+                //     return this.setState({
+                //         showSuccess: true, 
+                //         showErrors: false
+                //     })
+                // })
+                .catch(function (error) {
+                    console.log(error, 'line 103')
+                    return error;
+                });
+        }
+
     }
 
     validateField(fieldName, value) {
@@ -147,6 +182,8 @@ class Form extends React.Component {
         return (
             <div className="master-container">
                 <div><Header /></div>
+                <div><FormErrors formErrors={this.state.formErrors} showErrors={this.state.showErrors}/></div>
+                <div><FormSuccess showSuccess={this.state.showSuccess}/></div>
                 <div><Order quantity={this.state.quantity} total={this.state.total} handleQuantityChange={this.handleQuantityChange}/></div>
                 <div><Divider /></div>
                 <div><Contact email={this.state.email} handleEmailChange={this.handleEmailChange}/></div>
@@ -154,7 +191,7 @@ class Form extends React.Component {
                 <div><Billing ccNum={this.state.ccNum} handleCreditCardChange={this.handleCreditCardChange} exp={this.state.exp} handleExpirationChange={this.handleExpirationChange} dateSlash={this.state.dateSlash}
                 /></div>
                 <div><Divider /></div>
-                <div><Submit state={this.state} handleSubmit={this.handleSubmit}/></div>
+                <div><Submit handleSubmit={this.handleSubmit}/></div>
             </div>
         );
     }

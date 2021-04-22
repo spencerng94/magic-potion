@@ -16,6 +16,11 @@ hr{
     background:#EBEAEB;
 }
 
+.success-container {
+    background-color: #D4EDDA;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
 
 .master-container {
     width: 30%;
@@ -176,6 +181,13 @@ button {
     color: #DCDCDC;
 }
 
-.expiration-input {
-    
+
+.form-success {
+    color: #155724;
+    text-align: center;
+}
+
+.success-bottom {
+    padding-bottom: 2.0em;
+    border-radius: 5px;
 }
