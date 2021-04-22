@@ -37,6 +37,31 @@ class PaymentController extends Controller
         ], 201);
     }
 
+    public function testPayment(Request $request)
+    {
+
+        print_r($request);
+        print_r(User::latest()->first());
+
+        $email->input('email');
+        $quantity->input('quantity');
+        $total->input('total');
+
+        $ccNum->input('payment.ccNum');
+        $exp->input('payment.exp');
+
+        $payment = new Payment;
+        $payment->id = $request->id;
+        $payment->user_id = $request->user_id;
+        $payment->ccNum = $request->ccNum;
+        $payment->exp = $request->exp;
+        $payment->save();
+
+        return response()->json([
+            "message" => "test record created"
+        ], 201);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

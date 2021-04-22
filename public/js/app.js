@@ -2142,13 +2142,19 @@ var Form = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
       var payload = {
         email: this.state.email,
-        quantity: this.state.quantity,
+        quantity: parseInt(this.state.quantity),
         total: this.state.total,
         payment: {
           ccNum: this.state.ccNum,
           exp: this.state.exp
         }
-      }; // axios.post('http://localhost:8000/api/user')
+      };
+      axios__WEBPACK_IMPORTED_MODULE_8___default().post('api/magic', payload).then(function (response) {
+        console.log(response.data, 'line 98');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      console.log('made it to 104');
     }
   }, {
     key: "render",

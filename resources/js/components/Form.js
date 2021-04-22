@@ -85,7 +85,7 @@ class Form extends React.Component {
 
         let payload = {
             email: this.state.email,
-            quantity: this.state.quantity,
+            quantity: parseInt(this.state.quantity),
             total: this.state.total,
             payment: {
                 ccNum: this.state.ccNum,
@@ -93,7 +93,15 @@ class Form extends React.Component {
             }
         }
 
-        // axios.post('http://localhost:8000/api/user')
+        axios.post('api/magic', payload)
+            .then(function (response) {
+                console.log(response.data, 'line 98');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        console.log('made it to 104')
 
     }
 
