@@ -10,23 +10,24 @@ const FormErrors = (props) => {
         validQuantity: "Potion Quantity"
     }
 
-    console.log(showErrors, 'line 13')
-
     if (showErrors) {
         return (
-            <div className='form-errors'>
-                {Object.keys(formErrors).map((fieldName, i) => {
-                let currentField = formErrors[fieldName];
-                console.log(fieldName, 'line 20')
-                if(currentField === false){
-                    return (
-                        <div>Error: Please enter a valid {matchObject[fieldName]}.</div>
-                    // <p key={i}>{fieldName} {formErrors[fieldName]}</p>
-                    )        
-                } else {
-                    return '';
-                }
-                })}
+            <div>
+                <div className='form-errors-container'>
+                    {Object.keys(formErrors).map((fieldName, i) => {
+                    let currentField = formErrors[fieldName];
+                    console.log(fieldName, 'line 20')
+                    if(currentField === false){
+                        return (
+                            <div className='error-message'>Error: Invalid {matchObject[fieldName]}.</div>
+                        // <p key={i}>{fieldName} {formErrors[fieldName]}</p>
+                        )        
+                    } else {
+                        return '';
+                    }
+                    })}
+                </div>
+                <div className="errors-bottom"></div>
             </div>
         ) 
     } else {

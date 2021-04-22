@@ -16,10 +16,18 @@ hr{
     background:#EBEAEB;
 }
 
+.form-errors-container {
+    background-color: #F8D7DA;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 5px;
+}
+
 .success-container {
     background-color: #D4EDDA;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
+    border-radius: 5px;
 }
 
 .master-container {
@@ -188,6 +196,16 @@ button {
 }
 
 .success-bottom {
+    padding-bottom: 2.0em;
+}
+
+.error-message {
+    color: #721C24;
+    border-radius: 5px;
+    padding-left: 2.0em;
+}
+
+.errors-bottom {
     padding-bottom: 2.0em;
     border-radius: 5px;
 }

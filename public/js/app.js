@@ -2182,25 +2182,18 @@ var Form = /*#__PURE__*/function (_React$Component) {
 
       for (var input in formErrors) {
         if (formErrors[input] === false) {
-          console.log(formErrors[input], 'line 106');
           showErrors = true;
         }
       }
 
-      console.log(showErrors, 'line 111');
-
       if (showErrors) {
         this.setState({
           showErrors: true
-        }, function () {
-          console.log(_this2.state, 'line 122');
         });
       }
 
       if (!showErrors) {
         axios__WEBPACK_IMPORTED_MODULE_10___default().post('/api/magic', payload).then(function (res) {
-          console.log('line 103');
-
           _this2.setState({
             showSuccess: true,
             showErrors: false,
@@ -2209,18 +2202,8 @@ var Form = /*#__PURE__*/function (_React$Component) {
             email: '',
             ccNum: '',
             exp: ''
-          }, function () {
-            console.log(_this2.state, 'line 126');
           });
-        }) // .then(function (response) {
-        //     console.log(response, 'line 100')
-        //     return this.setState({
-        //         showSuccess: true, 
-        //         showErrors: false
-        //     })
-        // })
-        ["catch"](function (error) {
-          console.log(error, 'line 103');
+        })["catch"](function (error) {
           return error;
         });
       }
@@ -2232,14 +2215,12 @@ var Form = /*#__PURE__*/function (_React$Component) {
 
       switch (fieldName) {
         case 'ccNum':
-          var ccNumRegex = new RegExp(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/g).test(value); // true or false
-
+          var ccNumRegex = new RegExp(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/g).test(value);
           fieldValidationErrors.validCcNum = ccNumRegex ? true : false;
           break;
 
         case 'email':
-          var emailRegex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(value); // true or false
-
+          var emailRegex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(value);
           fieldValidationErrors.validEmail = emailRegex ? true : false;
           break;
 
@@ -2355,24 +2336,28 @@ var FormErrors = function FormErrors(props) {
     validExp: "Credit Card Expiration Date",
     validQuantity: "Potion Quantity"
   };
-  console.log(showErrors, 'line 13');
 
   if (showErrors) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "form-errors",
-      children: Object.keys(formErrors).map(function (fieldName, i) {
-        var currentField = formErrors[fieldName];
-        console.log(fieldName, 'line 20');
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "form-errors-container",
+        children: Object.keys(formErrors).map(function (fieldName, i) {
+          var currentField = formErrors[fieldName];
+          console.log(fieldName, 'line 20');
 
-        if (currentField === false) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            children: ["Error: Please enter a valid ", matchObject[fieldName], "."]
-          }) // <p key={i}>{fieldName} {formErrors[fieldName]}</p>
-          ;
-        } else {
-          return '';
-        }
-      })
+          if (currentField === false) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "error-message",
+              children: ["Error: Invalid ", matchObject[fieldName], "."]
+            }) // <p key={i}>{fieldName} {formErrors[fieldName]}</p>
+            ;
+          } else {
+            return '';
+          }
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "errors-bottom"
+      })]
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {});

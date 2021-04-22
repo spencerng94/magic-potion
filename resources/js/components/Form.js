@@ -103,23 +103,19 @@ class Form extends React.Component {
 
         for (let input in formErrors) {
             if (formErrors[input] === false) {
-                console.log(formErrors[input], 'line 106')
                 showErrors = true;
             }
         }
 
-        console.log(showErrors, 'line 111')
-
         if (showErrors) {
             this.setState({
                 showErrors: true
-            }, () => {console.log(this.state, 'line 122')})
+            })
         }
 
         if (!showErrors) {
             axios.post('/api/magic', payload)
                 .then((res) => {
-                    console.log('line 103')
                     this.setState({
                         showSuccess: true, 
                         showErrors: false,
@@ -128,17 +124,9 @@ class Form extends React.Component {
                         email: '',
                         ccNum: '',
                         exp: ''
-                    }, () => {console.log(this.state, 'line 126')})
+                    })
                 })
-                // .then(function (response) {
-                //     console.log(response, 'line 100')
-                //     return this.setState({
-                //         showSuccess: true, 
-                //         showErrors: false
-                //     })
-                // })
                 .catch(function (error) {
-                    console.log(error, 'line 103')
                     return error;
                 });
         }
@@ -150,11 +138,11 @@ class Form extends React.Component {
     
         switch(fieldName) {
             case 'ccNum':
-                let ccNumRegex = new RegExp(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/g).test(value); // true or false
+                let ccNumRegex = new RegExp(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/g).test(value);
                 fieldValidationErrors.validCcNum = ccNumRegex ? true : false;
             break;
             case 'email':
-                let emailRegex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(value); // true or false
+                let emailRegex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(value);
                 fieldValidationErrors.validEmail = emailRegex ? true : false;
             break;
             case 'quantity':
