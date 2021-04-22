@@ -2138,7 +2138,6 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
-      console.log('line 83');
       event.preventDefault();
       var payload = {
         email: this.state.email,
@@ -2149,10 +2148,13 @@ var Form = /*#__PURE__*/function (_React$Component) {
           exp: this.state.exp
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_8___default().post('api/magic', payload).then(function (response) {
-        console.log(response.data, 'line 98');
+      console.log(payload, 'line 96');
+      axios__WEBPACK_IMPORTED_MODULE_8___default().post('/api/magic', payload).then(function (response) {
+        console.log(response, 'line 100');
+        return response;
       })["catch"](function (error) {
-        console.log(error);
+        console.log(error, 'line 103');
+        return error;
       });
       console.log('made it to 104');
     }

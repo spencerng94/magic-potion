@@ -15,11 +15,14 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->string('ccNum');
             $table->string('exp');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+        });
+
+        Schema::table('payments', function($table) {
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

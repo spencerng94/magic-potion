@@ -30,4 +30,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('user', [UserController::class, 'createUser']);
 Route::post('payment', [PaymentController::class, 'createPayment']);
 
+// Route::post('magic', 'PaymentController@testPayment');
 Route::post('magic', [PaymentController::class, 'testPayment']);

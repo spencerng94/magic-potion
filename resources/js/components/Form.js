@@ -80,7 +80,6 @@ class Form extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log('line 83')
         event.preventDefault();
 
         let payload = {
@@ -93,12 +92,16 @@ class Form extends React.Component {
             }
         }
 
-        axios.post('api/magic', payload)
+        console.log(payload, 'line 96')
+
+        axios.post('/api/magic', payload)
             .then(function (response) {
-                console.log(response.data, 'line 98');
+                console.log(response, 'line 100')
+                return response;
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error, 'line 103')
+                return error;
             });
 
         console.log('made it to 104')
