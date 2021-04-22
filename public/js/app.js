@@ -2079,40 +2079,55 @@ var Form = /*#__PURE__*/function (_React$Component) {
       ccNum: '',
       exp: '',
       validEmail: false,
-      dateSlash: false
+      dateSlash: false,
+      formErrors: {
+        validQuantity: false,
+        validEmail: false,
+        validCcNum: false,
+        validExp: false
+      }
     };
     _this.handleQuantityChange = _this.handleQuantityChange.bind(_assertThisInitialized(_this));
     _this.handleEmailChange = _this.handleEmailChange.bind(_assertThisInitialized(_this));
     _this.handleCreditCardChange = _this.handleCreditCardChange.bind(_assertThisInitialized(_this));
     _this.handleExpirationChange = _this.handleExpirationChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.validateField = _this.validateField.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Form, [{
     key: "handleQuantityChange",
     value: function handleQuantityChange(event) {
-      if (event.target.value > 3) {
+      var quantity = event.target.value;
+
+      if (quantity > 3) {
         alert('Error: Maximum of 3 potions allowed for each purchase.');
       } else {
         var currentTotal = event.target.value * 49.99;
+        var field = "quantity";
         this.setState({
           quantity: event.target.value,
           total: currentTotal
         });
+        this.validateField(field, quantity);
       }
     }
   }, {
     key: "handleCreditCardChange",
     value: function handleCreditCardChange(e) {
+      var field = "ccNum";
+      var ccNum = e.target.value;
       this.setState({
         ccNum: e.target.value
       });
+      this.validateField(field, ccNum);
     }
   }, {
     key: "handleExpirationChange",
     value: function handleExpirationChange(event) {
       var val = event.target.value;
+      var field = "exp";
       var currentLength = val.length;
 
       if (currentLength === 3 && !this.state.dateSlash && !val.includes('/')) {
@@ -2127,21 +2142,19 @@ var Form = /*#__PURE__*/function (_React$Component) {
           dateSlash: false
         });
       }
+
+      this.validateField(field, val);
     }
   }, {
     key: "handleEmailChange",
     value: function handleEmailChange(event) {
-      // let regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
-      // console.log(regex, 'line 38');
-      // if (regex) {
+      var field = "email";
+      var email = event.target.value;
       this.setState({
-        email: event.target.value,
+        email: email,
         validEmail: true
-      }); // } else {
-      //     this.setState({
-      //         validEmail: false
-      //     })
-      // }
+      });
+      this.validateField(field, email);
     }
   }, {
     key: "handleSubmit",
@@ -2164,7 +2177,50 @@ var Form = /*#__PURE__*/function (_React$Component) {
         console.log(error, 'line 103');
         return error;
       });
-      console.log('made it to 104');
+      console.log(this.state.formErrors, 'line 110');
+    }
+  }, {
+    key: "validateField",
+    value: function validateField(fieldName, value) {
+      var fieldValidationErrors = this.state.formErrors;
+
+      switch (fieldName) {
+        case 'ccNum':
+          var ccNumRegex = new RegExp(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/g).test(value); // true or false
+
+          fieldValidationErrors.validCcNum = ccNumRegex ? true : false;
+          break;
+
+        case 'email':
+          var emailRegex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(value); // true or false
+
+          fieldValidationErrors.validEmail = emailRegex ? true : false;
+          break;
+
+        case 'quantity':
+          var maximum = 3;
+          var minimum = 0;
+
+          if (value > maximum || value <= minimum) {
+            fieldValidationErrors.validQuantity = false;
+          } else {
+            fieldValidationErrors.validQuantity = true;
+          }
+
+          break;
+
+        case 'exp':
+          var expRegex = new RegExp(/^(0[1-9]|1[0-2])\/\d{2}$/).test(value);
+          fieldValidationErrors.validExp = expRegex ? true : false;
+          break;
+
+        default:
+          break;
+      }
+
+      this.setState({
+        formErrors: fieldValidationErrors
+      });
     }
   }, {
     key: "render",

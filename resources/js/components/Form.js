@@ -18,35 +18,43 @@ class Form extends React.Component {
             ccNum: '',
             exp: '',
             validEmail: false,
-            dateSlash: false
+            dateSlash: false,
+            formErrors: {validQuantity: false, validEmail: false, validCcNum: false, validExp: false},
         }
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleCreditCardChange = this.handleCreditCardChange.bind(this);
         this.handleExpirationChange = this.handleExpirationChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateField = this.validateField.bind(this);
     }
 
     handleQuantityChange(event) {
-        if (event.target.value > 3) {
+        let quantity = event.target.value;
+        if (quantity > 3) {
             alert('Error: Maximum of 3 potions allowed for each purchase.');
         } else {
             let currentTotal = event.target.value * 49.99;
+            let field = "quantity";
             this.setState({
                 quantity: event.target.value,
                 total: currentTotal
             });
+            this.validateField(field, quantity);
         }
     }
 
     handleCreditCardChange(e) {
-        this.setState({ccNum: e.target.value})
+        let field = "ccNum";
+        let ccNum = e.target.value;
+        this.setState({ccNum: e.target.value});
+        this.validateField(field, ccNum);
     }
 
     handleExpirationChange(event) {
         const val = event.target.value;
+        let field = "exp";
         let currentLength = val.length;
-
 
         if (currentLength === 3 && !this.state.dateSlash && !val.includes('/')) {
             const dateWithSlash = val.substring(0, 2) + '/' + val.substring(2, 4);
@@ -60,22 +68,18 @@ class Form extends React.Component {
                 dateSlash: false
             })
         }
+        this.validateField(field, val);
     }
 
 
     handleEmailChange(event) {
-        // let regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
-        // console.log(regex, 'line 38');
-        // if (regex) {
+        let field = "email";
+        let email = event.target.value;
         this.setState({
-            email: event.target.value, 
+            email: email, 
             validEmail: true
         })
-        // } else {
-        //     this.setState({
-        //         validEmail: false
-        //     })
-        // }
+        this.validateField(field, email)
     }
 
     handleSubmit(event) {
@@ -103,9 +107,41 @@ class Form extends React.Component {
                 return error;
             });
 
-        console.log('made it to 104')
-
+        console.log(this.state.formErrors, 'line 110')
     }
+
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+    
+        switch(fieldName) {
+            case 'ccNum':
+                let ccNumRegex = new RegExp(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/g).test(value); // true or false
+                fieldValidationErrors.validCcNum = ccNumRegex ? true : false;
+            break;
+            case 'email':
+                let emailRegex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(value); // true or false
+                fieldValidationErrors.validEmail = emailRegex ? true : false;
+            break;
+            case 'quantity':
+                let maximum = 3;
+                let minimum = 0;
+                if (value > maximum || value <= minimum) {
+                    fieldValidationErrors.validQuantity = false;
+                } else {
+                    fieldValidationErrors.validQuantity = true;
+                }
+            break;
+            case 'exp':
+                let expRegex = new RegExp(/^(0[1-9]|1[0-2])\/\d{2}$/).test(value);
+                fieldValidationErrors.validExp = expRegex ? true : false;
+            break;
+          default:
+            break;
+        }
+        this.setState({
+            formErrors: fieldValidationErrors
+        })
+      }
 
     render() {
         return (
