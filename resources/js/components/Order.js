@@ -9,7 +9,7 @@ const Order = (props) => {
             <div className="order-details-container">
                 <div className="quantity-container">
                     <div className="quantity-label">Qty<span>*</span></div>
-                    <input type="text" value={quantity} onChange={handleQuantityChange} id="fname" name="firstname" placeholder="Max 3"></input>
+                    <input type="number" value={quantity} onChange={handleQuantityChange} id="fname" name="firstname" placeholder="Max 3"></input>
                 </div>
                 <div className="price-container">
                     <div className="input-label">Total Price</div>

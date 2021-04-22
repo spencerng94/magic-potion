@@ -39,15 +39,14 @@ class Form extends React.Component {
         }
     }
 
-    handleCreditCardChange(event) {
-        this.setState({
-            ccNum: event.target.value
-        })
+    handleCreditCardChange(e) {
+        this.setState({ccNum: e.target.value})
     }
 
     handleExpirationChange(event) {
         const val = event.target.value;
         let currentLength = val.length;
+
 
         if (currentLength === 3 && !this.state.dateSlash && !val.includes('/')) {
             const dateWithSlash = val.substring(0, 2) + '/' + val.substring(2, 4);
@@ -65,18 +64,18 @@ class Form extends React.Component {
 
 
     handleEmailChange(event) {
-        let regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
-        console.log(regex, 'line 38');
-        if (regex) {
-            this.setState({
-                email: event.target.value, 
-                validEmail: true
-            })
-        } else {
-            this.setState({
-                validEmail: false
-            })
-        }
+        // let regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
+        // console.log(regex, 'line 38');
+        // if (regex) {
+        this.setState({
+            email: event.target.value, 
+            validEmail: true
+        })
+        // } else {
+        //     this.setState({
+        //         validEmail: false
+        //     })
+        // }
     }
 
     handleSubmit(event) {
@@ -116,7 +115,8 @@ class Form extends React.Component {
                 <div><Divider /></div>
                 <div><Contact email={this.state.email} handleEmailChange={this.handleEmailChange}/></div>
                 <div><Divider /></div>
-                <div><Billing ccNum={this.state.ccNum} handleCreditCardChange={this.handleCreditCardChange} exp={this.state.exp} handleExpirationChange={this.handleExpirationChange} dateSlash={this.state.dateSlash}/></div>
+                <div><Billing ccNum={this.state.ccNum} handleCreditCardChange={this.handleCreditCardChange} exp={this.state.exp} handleExpirationChange={this.handleExpirationChange} dateSlash={this.state.dateSlash}
+                /></div>
                 <div><Divider /></div>
                 <div><Submit state={this.state} handleSubmit={this.handleSubmit}/></div>
             </div>

@@ -1879,7 +1879,14 @@ var Billing = function Billing(props) {
       ccNum = props.ccNum,
       handleExpirationChange = props.handleExpirationChange,
       exp = props.exp,
-      dateSlash = props.dateSlash;
+      isInputNumber = props.isInputNumber;
+
+  var numberCheck = function numberCheck(event) {
+    if (!/[0-9]/.test(event.key)) {
+      event.preventDefault();
+    }
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "section-title",
@@ -1893,6 +1900,8 @@ var Billing = function Billing(props) {
           children: "Credit Card Number"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
+          onKeyPress: numberCheck,
+          maxlength: "19",
           value: ccNum,
           onChange: handleCreditCardChange,
           id: "fname",
@@ -1907,6 +1916,7 @@ var Billing = function Billing(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
             type: "text",
+            onKeyPress: numberCheck,
             value: exp,
             onChange: handleExpirationChange,
             className: "expiration-input",
@@ -1952,7 +1962,7 @@ var Contact = function Contact(props) {
       className: "input-label",
       children: "Email Address"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-      type: "text",
+      type: "email",
       id: "fname",
       name: "firstname",
       onChange: handleEmailChange,
@@ -2094,9 +2104,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleCreditCardChange",
-    value: function handleCreditCardChange(event) {
+    value: function handleCreditCardChange(e) {
       this.setState({
-        ccNum: event.target.value
+        ccNum: e.target.value
       });
     }
   }, {
@@ -2121,19 +2131,17 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleEmailChange",
     value: function handleEmailChange(event) {
-      var regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
-      console.log(regex, 'line 38');
-
-      if (regex) {
-        this.setState({
-          email: event.target.value,
-          validEmail: true
-        });
-      } else {
-        this.setState({
-          validEmail: false
-        });
-      }
+      // let regex = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(event.target.value);
+      // console.log(regex, 'line 38');
+      // if (regex) {
+      this.setState({
+        email: event.target.value,
+        validEmail: true
+      }); // } else {
+      //     this.setState({
+      //         validEmail: false
+      //     })
+      // }
     }
   }, {
     key: "handleSubmit",
@@ -2282,7 +2290,7 @@ var Order = function Order(props) {
             children: "*"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-          type: "text",
+          type: "number",
           value: quantity,
           onChange: handleQuantityChange,
           id: "fname",
