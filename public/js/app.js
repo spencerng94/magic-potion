@@ -2187,39 +2187,38 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "checkDuplicate",
     value: function () {
-      var _checkDuplicate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(currentEmail, showErrors) {
+      var _checkDuplicate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(currentEmail) {
         var _this2 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(showErrors, 'line 92');
-                _context.next = 3;
+                _context.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_11___default().get("/api/duplicate/".concat(currentEmail)).then(function (res) {
-                  console.log(res.data, 'line 120');
-
                   if (res.data.success) {
                     _this2.setState({
-                      duplicateEmail: false
+                      duplicateEmail: false,
+                      showErrors: false
+                    });
+                  } else {
+                    _this2.setState({
+                      duplicateEmail: true,
+                      showSuccess: false
                     });
                   }
                 }).then(function () {
-                  console.log(_this2.state.duplicateEmail, 'line 102');
-
                   if (!_this2.state.showErrors && _this2.state.duplicateEmail === false) {
                     _this2.magicPost();
                   }
                 })["catch"](function (error) {
-                  console.log(error, 'line 123');
-
                   _this2.setState({
                     duplicateEmail: true,
                     showSuccess: false
                   });
                 });
 
-              case 3:
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -2227,7 +2226,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         }, _callee);
       }));
 
-      function checkDuplicate(_x, _x2) {
+      function checkDuplicate(_x) {
         return _checkDuplicate.apply(this, arguments);
       }
 
@@ -2253,8 +2252,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
                     exp: this.state.exp
                   }
                 };
-                console.log(payload, 'line 124');
-                _context2.next = 4;
+                _context2.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_11___default().post('/api/magic', payload).then(function (res) {
                   _this3.setState({
                     showSuccess: true,
@@ -2266,11 +2264,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
                     exp: ''
                   });
                 })["catch"](function (error) {
-                  console.log(error, 'line 139');
                   return error;
                 });
 
-              case 4:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -2288,32 +2285,26 @@ var Form = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(event) {
       event.preventDefault();
-      var showErrors = '';
-      var duplicateEmail = '';
+      var errorPresent = '';
       var formErrors = this.state.formErrors;
 
       for (var input in formErrors) {
         if (formErrors[input] === false) {
-          showErrors = true;
+          errorPresent = true;
         }
       }
 
-      if (showErrors) {
+      if (errorPresent) {
         this.setState({
           showErrors: true
         });
-      } // GET request for email address
-      // if it exists, set duplicateEmail = true
-      // TODO: put in duplicateEmail into formErrors for state and handle mapping w/ if else 
-
+      }
 
       var currentEmail = this.state.email;
 
-      if (this.state.formErrors.validEmail === true && !showErrors) {
-        this.checkDuplicate(currentEmail, showErrors);
+      if (this.state.formErrors.validEmail === true && !errorPresent) {
+        this.checkDuplicate(currentEmail);
       }
-
-      console.log(this.state, 'line 143');
     }
   }, {
     key: "validateField",
@@ -2431,8 +2422,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 
@@ -2447,26 +2436,23 @@ var FormErrors = function FormErrors(props) {
     validExp: "Credit card Expiration Date is invalid",
     validQuantity: "Magic potion order may not exceed maximum quantity"
   };
-  var allErrors = formErrors;
+  var allErrors = {};
+  var newErrors = Object.assign(allErrors, formErrors);
   allErrors.duplicateEmail = duplicateEmail;
-  console.log('line 16', allErrors);
 
   if (showErrors || duplicateEmail === true) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "form-errors-container",
-        children: Object.keys(formErrors).map(function (fieldName, i) {
-          var currentField = formErrors[fieldName];
-          console.log(fieldName, _typeof(currentField), 'line 24');
+        children: Object.keys(allErrors).map(function (fieldName, i) {
+          var currentField = allErrors[fieldName];
 
           if (currentField === false && fieldName !== "duplicateEmail") {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "error-message",
               children: ["Error: ", matchObject[fieldName], "."]
             });
-          }
-
-          if (fieldName === "duplicateEmail" && currentField === true) {
+          } else if (fieldName === "duplicateEmail" && currentField === true) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
               className: "error-message",
               children: "Error: An order has already been placed with this email address."

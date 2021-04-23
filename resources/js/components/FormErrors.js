@@ -10,24 +10,22 @@ const FormErrors = (props) => {
         validQuantity: "Magic potion order may not exceed maximum quantity",
     }
 
-    let allErrors = formErrors;
-    allErrors.duplicateEmail = duplicateEmail;
+    let allErrors = {};
+    let newErrors = Object.assign(allErrors, formErrors);
 
-    console.log('line 16', allErrors);
+    allErrors.duplicateEmail = duplicateEmail;
 
     if (showErrors || duplicateEmail === true) {
         return (
             <div>
                 <div className='form-errors-container'>
-                    {Object.keys(formErrors).map((fieldName, i) => {
-                    let currentField = formErrors[fieldName];
-                    console.log(fieldName, typeof(currentField), 'line 24')
+                    {Object.keys(allErrors).map((fieldName, i) => {
+                    let currentField = allErrors[fieldName];
                     if(currentField === false && fieldName !== "duplicateEmail"){
                         return (
                             <div className='error-message'>Error: {matchObject[fieldName]}.</div>
                         )        
-                    } 
-                    if (fieldName === "duplicateEmail" && currentField === true) {
+                    } else if (fieldName === "duplicateEmail" && currentField === true) {
                         return (
                             <div className='error-message'>Error: An order has already been placed with this email address.</div>
                         )

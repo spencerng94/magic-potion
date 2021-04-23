@@ -88,26 +88,27 @@ class Form extends React.Component {
         this.validateField(field, email)
     }
 
-    async checkDuplicate(currentEmail, showErrors) {
-        console.log(showErrors, 'line 92')
-
+    async checkDuplicate(currentEmail) {
         await axios.get(`/api/duplicate/${currentEmail}`)
             .then((res) => { 
-                console.log(res.data, 'line 120');
                 if (res.data.success) {
                     this.setState({
-                        duplicateEmail: false
+                        duplicateEmail: false,
+                        showErrors: false
+                    })
+                } else {
+                    this.setState({
+                        duplicateEmail: true,
+                        showSuccess: false
                     })
                 }
             })
             .then(() => {
-                console.log(this.state.duplicateEmail, 'line 102')
                 if (!this.state.showErrors && this.state.duplicateEmail === false) {
                     this.magicPost();
                 }
             })
             .catch((error) => {
-                console.log(error, 'line 123');
                 this.setState({
                     duplicateEmail: true,
                     showSuccess: false
@@ -127,8 +128,6 @@ class Form extends React.Component {
             }
         }
 
-        console.log(payload, 'line 124')
-
         await axios.post('/api/magic', payload)
             .then((res) => {
                 this.setState({
@@ -142,7 +141,6 @@ class Form extends React.Component {
                 })
             })
             .catch(function (error) {
-                console.log(error, 'line 139')
                 return error;
             });
         }
@@ -150,33 +148,26 @@ class Form extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        let showErrors = '';
-        let duplicateEmail = '';
+        let errorPresent = '';
         let formErrors = this.state.formErrors;
 
         for (let input in formErrors) {
             if (formErrors[input] === false) {
-                showErrors = true;
+                errorPresent = true;
             }
         }
 
-        if (showErrors) {
+        if (errorPresent) {
             this.setState({
                 showErrors: true
             })
         }
-
-        // GET request for email address
-            // if it exists, set duplicateEmail = true
-            // TODO: put in duplicateEmail into formErrors for state and handle mapping w/ if else 
         
         let currentEmail = this.state.email;
 
-        if (this.state.formErrors.validEmail === true && !showErrors) {
-            this.checkDuplicate(currentEmail, showErrors);
+        if (this.state.formErrors.validEmail === true && !errorPresent) {
+            this.checkDuplicate(currentEmail);
         }
-
-        console.log(this.state, 'line 143')
 
     }
 
