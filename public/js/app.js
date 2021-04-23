@@ -2246,10 +2246,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
                     exp: this.state.exp
                   }
                 };
-                _context2.next = 3;
+                console.log(payload, 'line 124');
+                _context2.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_11___default().post('/api/magic', payload).then(function (res) {
-                  console.log('128 magicPost');
-
                   _this3.setState({
                     showSuccess: true,
                     showErrors: false,
@@ -2264,7 +2263,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
                   return error;
                 });
 
-              case 3:
+              case 4:
               case "end":
                 return _context2.stop();
             }

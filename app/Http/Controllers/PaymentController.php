@@ -10,7 +10,6 @@ class PaymentController extends Controller
 {
     public function createPayment(Request $request)
     {
-
         $user = new User;
         $user->email = $request->email;
         $user->quantity = $request->quantity;
@@ -19,6 +18,9 @@ class PaymentController extends Controller
 
         $ccNum = $request["payment"]["ccNum"];
         $exp = $request["payment"]["exp"];
+
+        // $ccNum = $request->payment->ccNum;
+        // $exp = $request->payment->exp;
         $last = User::latest()->first("id")->value("id");
 
         $payment = new Payment;

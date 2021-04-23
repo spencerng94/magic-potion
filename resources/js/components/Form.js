@@ -121,9 +121,10 @@ class Form extends React.Component {
             }
         }
 
+        console.log(payload, 'line 124')
+
         await axios.post('/api/magic', payload)
             .then((res) => {
-                console.log('128 magicPost')
                 this.setState({
                     showSuccess: true, 
                     showErrors: false,

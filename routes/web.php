@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,9 @@ Route::get('/', function () {
 Route::get('/testing', function () {
     return ['message' => 'hello'];
 });
+
+Route::post('magic', [PaymentController::class, 'createPayment'])->name('magic');
+
+Route::post('user', [UserController::class, 'createUser'])->name('user');
+
+Route::get('duplicate/{email}', [UserController::class, 'checkDuplicateEmail'])->name('duplicate');

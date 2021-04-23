@@ -26,4 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('magic', [PaymentController::class, 'createPayment']);
 
+Route::post('user', [UserController::class, 'createUser'])->name('user');
+
 Route::get('duplicate/{email}', [UserController::class, 'checkDuplicateEmail']);
+
