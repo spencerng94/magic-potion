@@ -2091,7 +2091,8 @@ var Form = /*#__PURE__*/function (_React$Component) {
         validExp: false
       },
       showErrors: '',
-      showSuccess: ''
+      showSuccess: '',
+      duplicateEmail: ''
     };
     _this.handleQuantityChange = _this.handleQuantityChange.bind(_assertThisInitialized(_this));
     _this.handleEmailChange = _this.handleEmailChange.bind(_assertThisInitialized(_this));
@@ -2178,13 +2179,17 @@ var Form = /*#__PURE__*/function (_React$Component) {
         }
       };
       var showErrors = '';
+      var duplicateEmail = '';
       var formErrors = this.state.formErrors;
 
       for (var input in formErrors) {
         if (formErrors[input] === false) {
           showErrors = true;
         }
-      }
+      } // GET request for email address
+      // if it exists, set duplicateEmail = true
+      // TODO: put in duplicateEmail into formErrors for state and handle mapping w/ if else 
+
 
       if (showErrors) {
         this.setState({
@@ -2259,7 +2264,8 @@ var Form = /*#__PURE__*/function (_React$Component) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_FormErrors__WEBPACK_IMPORTED_MODULE_8__.default, {
             formErrors: this.state.formErrors,
-            showErrors: this.state.showErrors
+            showErrors: this.state.showErrors,
+            duplicateEmail: this.state.duplicateEmail
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_FormSuccess__WEBPACK_IMPORTED_MODULE_9__.default, {
@@ -2329,13 +2335,16 @@ __webpack_require__.r(__webpack_exports__);
 
 var FormErrors = function FormErrors(props) {
   var formErrors = props.formErrors,
-      showErrors = props.showErrors;
+      showErrors = props.showErrors,
+      duplicateEmail = props.duplicateEmail;
   var matchObject = {
     validCcNum: "Credit Card Number",
     validEmail: "Email Address",
     validExp: "Credit Card Expiration Date",
     validQuantity: "Potion Quantity"
   };
+  var allErrors = formErrors;
+  allErrors.duplicateEmail = duplicateEmail;
 
   if (showErrors) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -2345,12 +2354,16 @@ var FormErrors = function FormErrors(props) {
           var currentField = formErrors[fieldName];
           console.log(fieldName, 'line 20');
 
-          if (currentField === false) {
+          if (currentField === false && fieldName !== "duplicateEmail") {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "error-message",
               children: ["Error: Invalid ", matchObject[fieldName], "."]
-            }) // <p key={i}>{fieldName} {formErrors[fieldName]}</p>
-            ;
+            });
+          } else if (fieldName === "duplicateEmail" && !duplicateEmail) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "error-message",
+              children: "Error: An order has already been placed with this email address."
+            });
           } else {
             return '';
           }
@@ -2359,7 +2372,9 @@ var FormErrors = function FormErrors(props) {
         className: "errors-bottom"
       })]
     });
-  } else {
+  }
+
+  if (duplicateEmail) {} else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {});
   }
 };

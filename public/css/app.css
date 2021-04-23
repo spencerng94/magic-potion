@@ -203,6 +203,7 @@ button {
     color: #721C24;
     border-radius: 5px;
     padding-left: 2.0em;
+    padding-right: 2.0em;
 }
 
 .errors-bottom {

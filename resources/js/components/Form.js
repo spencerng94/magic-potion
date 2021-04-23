@@ -23,7 +23,8 @@ class Form extends React.Component {
             dateSlash: false,
             formErrors: {validQuantity: false, validEmail: false, validCcNum: false, validExp: false},
             showErrors: '',
-            showSuccess: ''
+            showSuccess: '',
+            duplicateEmail: ''
         }
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -99,6 +100,7 @@ class Form extends React.Component {
         }
 
         let showErrors = '';
+        let duplicateEmail = '';
         let formErrors = this.state.formErrors;
 
         for (let input in formErrors) {
@@ -106,6 +108,10 @@ class Form extends React.Component {
                 showErrors = true;
             }
         }
+
+        // GET request for email address
+            // if it exists, set duplicateEmail = true
+            // TODO: put in duplicateEmail into formErrors for state and handle mapping w/ if else 
 
         if (showErrors) {
             this.setState({
@@ -170,7 +176,7 @@ class Form extends React.Component {
         return (
             <div className="master-container">
                 <div><Header /></div>
-                <div><FormErrors formErrors={this.state.formErrors} showErrors={this.state.showErrors}/></div>
+                <div><FormErrors formErrors={this.state.formErrors} showErrors={this.state.showErrors} duplicateEmail={this.state.duplicateEmail}/></div>
                 <div><FormSuccess showSuccess={this.state.showSuccess}/></div>
                 <div><Order quantity={this.state.quantity} total={this.state.total} handleQuantityChange={this.handleQuantityChange}/></div>
                 <div><Divider /></div>
