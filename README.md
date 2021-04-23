@@ -98,6 +98,7 @@ Writes valid form data for a single user and their payment information into SQLi
 `{
     "error": "Already Exists"
 }`
+```
 
 ## Testing 
 
