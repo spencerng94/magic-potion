@@ -56,11 +56,53 @@ A user can fill out a form and fill out the fields with a valid `quantity` (max:
 - **Order Error:** The form will notify the user that the Order failed and to address an invalid input or a duplicate email error via a notification above "Your Order".
 
 <p float="left">
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Untouched.png"/>
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Success.png"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Untouched.png" width="300" height="600"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Success.png" width="300" height="600"/>
 </p>
 
 <p float="left">
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Errors.png"/>
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Duplicates.png"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Errors.png" width="300" height="600"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Duplicates.png" width="300" height="600"/>
 </p>
+
+## POST Order
+Writes valid form data for a single user and their payment information into SQLite database and returns unique payment `id` upon success.
+
+- **URL**: /api/magic
+- **METHOD**: `POST`
+- **URL Params**: None
+- **Data Params**: 
+```javascript
+{
+    email: 'dogecoin4@gmail.com',
+    quantity: 1,
+    total: 49.99,
+    payment: {
+        ccNum: '5105105105105100',
+        exp: '12/12'
+    }
+}
+```
+- **Success Response:**
+    - **Code:** 201 <br />
+      **Content:** 
+```javascript      
+`{ 
+    "id" : uid 
+}`
+```
+- **Error Response:**
+    - **Code:** 422 <br />
+      **Content:**
+```javascript
+`{
+    "error": "Already Exists"
+}`
+
+## Testing 
+
+To run the unit tests for API requests please run the following command from the root directory:
+
+```bash
+composer run test
+```
