@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function testPayment(Request $request)
+    public function createPayment(Request $request)
     {
 
         $user = new User;

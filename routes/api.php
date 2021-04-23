@@ -24,11 +24,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('users', 'UserController@getAllUsers');
-// Route::get('payments', 'PaymentController@getAllPayments');
+Route::post('magic', [PaymentController::class, 'createPayment']);
 
-Route::post('user', [UserController::class, 'createUser']);
-Route::post('payment', [PaymentController::class, 'createPayment']);
-
-// Route::post('magic', 'PaymentController@testPayment');
-Route::post('magic', [PaymentController::class, 'testPayment']);
+Route::get('duplicate/{email}', [UserController::class, 'checkDuplicateEmail']);
