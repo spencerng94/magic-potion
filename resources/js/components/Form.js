@@ -94,9 +94,11 @@ class Form extends React.Component {
         await axios.get(`/api/duplicate/${currentEmail}`)
             .then((res) => { 
                 console.log(res.data, 'line 120');
-                this.setState({
-                    duplicateEmail: res.data
-                })
+                if (res.data.success) {
+                    this.setState({
+                        duplicateEmail: false
+                    })
+                }
             })
             .then(() => {
                 console.log(this.state.duplicateEmail, 'line 102')
@@ -106,6 +108,10 @@ class Form extends React.Component {
             })
             .catch((error) => {
                 console.log(error, 'line 123');
+                this.setState({
+                    duplicateEmail: true,
+                    showSuccess: false
+                })
             })
 
     }
@@ -169,10 +175,6 @@ class Form extends React.Component {
         if (this.state.formErrors.validEmail === true && !showErrors) {
             this.checkDuplicate(currentEmail, showErrors);
         }
-
-        // if (!showErrors && this.state.duplicateEmail === false) {
-        //     this.magicPost();
-        // }
 
         console.log(this.state, 'line 143')
 

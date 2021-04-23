@@ -2199,9 +2199,11 @@ var Form = /*#__PURE__*/function (_React$Component) {
                 return axios__WEBPACK_IMPORTED_MODULE_11___default().get("/api/duplicate/".concat(currentEmail)).then(function (res) {
                   console.log(res.data, 'line 120');
 
-                  _this2.setState({
-                    duplicateEmail: res.data
-                  });
+                  if (res.data.success) {
+                    _this2.setState({
+                      duplicateEmail: false
+                    });
+                  }
                 }).then(function () {
                   console.log(_this2.state.duplicateEmail, 'line 102');
 
@@ -2210,6 +2212,11 @@ var Form = /*#__PURE__*/function (_React$Component) {
                   }
                 })["catch"](function (error) {
                   console.log(error, 'line 123');
+
+                  _this2.setState({
+                    duplicateEmail: true,
+                    showSuccess: false
+                  });
                 });
 
               case 3:
@@ -2304,10 +2311,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
 
       if (this.state.formErrors.validEmail === true && !showErrors) {
         this.checkDuplicate(currentEmail, showErrors);
-      } // if (!showErrors && this.state.duplicateEmail === false) {
-      //     this.magicPost();
-      // }
-
+      }
 
       console.log(this.state, 'line 143');
     }
