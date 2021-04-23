@@ -17,10 +17,8 @@ class UserController extends Controller
         $found = User::where('email', $email)->exists();
 
         if ($found == true) {
-            print_r('email found');
             return response()->json(true);
         } else {
-            print_r('no email found');
             return response()->json(false);
         }
     }

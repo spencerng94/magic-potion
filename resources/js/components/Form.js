@@ -32,6 +32,8 @@ class Form extends React.Component {
         this.handleExpirationChange = this.handleExpirationChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.validateField = this.validateField.bind(this);
+        this.checkDuplicate = this.checkDuplicate.bind(this);
+        this.magicPost = this.magicPost.bind(this);
     }
 
     handleQuantityChange(event) {
@@ -86,9 +88,29 @@ class Form extends React.Component {
         this.validateField(field, email)
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
+    async checkDuplicate(currentEmail, showErrors) {
+        console.log(showErrors, 'line 92')
 
+        await axios.get(`/api/duplicate/${currentEmail}`)
+            .then((res) => { 
+                console.log(res.data, 'line 120');
+                this.setState({
+                    duplicateEmail: res.data
+                })
+            })
+            .then(() => {
+                console.log(this.state.duplicateEmail, 'line 102')
+                if (!this.state.showErrors && this.state.duplicateEmail === false) {
+                    this.magicPost();
+                }
+            })
+            .catch((error) => {
+                console.log(error, 'line 123');
+            })
+
+    }
+
+    async magicPost() {
         let payload = {
             email: this.state.email,
             quantity: parseInt(this.state.quantity),
@@ -98,6 +120,28 @@ class Form extends React.Component {
                 exp: this.state.exp
             }
         }
+
+        await axios.post('/api/magic', payload)
+            .then((res) => {
+                console.log('128 magicPost')
+                this.setState({
+                    showSuccess: true, 
+                    showErrors: false,
+                    quantity: '',
+                    total: '',
+                    email: '',
+                    ccNum: '',
+                    exp: ''
+                })
+            })
+            .catch(function (error) {
+                console.log(error, 'line 139')
+                return error;
+            });
+        }
+
+    handleSubmit(event) {
+        event.preventDefault();
 
         let showErrors = '';
         let duplicateEmail = '';
@@ -109,33 +153,27 @@ class Form extends React.Component {
             }
         }
 
-        // GET request for email address
-            // if it exists, set duplicateEmail = true
-            // TODO: put in duplicateEmail into formErrors for state and handle mapping w/ if else 
-
         if (showErrors) {
             this.setState({
                 showErrors: true
             })
         }
 
-        if (!showErrors) {
-            axios.post('/api/magic', payload)
-                .then((res) => {
-                    this.setState({
-                        showSuccess: true, 
-                        showErrors: false,
-                        quantity: '',
-                        total: '',
-                        email: '',
-                        ccNum: '',
-                        exp: ''
-                    })
-                })
-                .catch(function (error) {
-                    return error;
-                });
+        // GET request for email address
+            // if it exists, set duplicateEmail = true
+            // TODO: put in duplicateEmail into formErrors for state and handle mapping w/ if else 
+        
+        let currentEmail = this.state.email;
+
+        if (this.state.formErrors.validEmail === true && !showErrors) {
+            this.checkDuplicate(currentEmail, showErrors);
         }
+
+        // if (!showErrors && this.state.duplicateEmail === false) {
+        //     this.magicPost();
+        // }
+
+        console.log(this.state, 'line 143')
 
     }
 
