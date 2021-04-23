@@ -52,6 +52,15 @@ php artisan serve
 A user can fill out a form and fill out the fields with a valid `quantity` (max: 3), `email` address, `ccNum` (credit card number), and `exp` (credit card expiration date). The `total` cost for the potions will automatically be calculated and applied upon a valid `quantity` entry.
 
 - **App Startup:** The form will display as a SPA (Single Page Application) as shown with the aforementioned input fields. 
-<p alight="right">
- <img width="150" src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Errors.png"/>
+- **Successful Order:** The form will notify the user that the Order was successful with a green notification above "Your Order".
+- **Order Error:** The form will notify the user that the Order failed and to address an invalid input or a duplicate email error via a notification above "Your Order".
+
+<p float="left">
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Untouched.png"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Success.png"/>
+</p>
+
+<p float="left">
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Errors.png"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Duplicates.png"/>
 </p>
