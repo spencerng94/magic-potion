@@ -1,212 +1,225 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-
 body {
-    font-family: Arial;
-}
-  
-h1 {
-
+  font-family: Arial;
 }
 
-hr{
-    border:0;
-    margin:0;
-    width:100%;
-    height:2px;
-    background:#EBEAEB;
+hr {
+  border: 0;
+  margin: 0;
+  width: 100%;
+  height: 2px;
+  background: #EBEAEB;
 }
 
 .form-errors-container {
-    background-color: #F8D7DA;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    border-radius: 5px;
+  background-color: #F8D7DA;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-radius: 5px;
 }
 
 .success-container {
-    background-color: #D4EDDA;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    border-radius: 5px;
+  background-color: #D4EDDA;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-radius: 5px;
 }
 
 .master-container {
-    width: 30%;
-    padding-left: 50px;
-    padding-right: 50px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-} 
+  width: 30%;
+  padding-left: 50px;
+  padding-right: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .billing-details-container {
-    display: flex;
+  display: flex;
 }
 
 .button-container {
-    padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
 .credit-card-container {
-    flex: 1;
-    margin-right: 0.6em;
+  flex: 1;
+  margin-right: 0.6em;
 }
 
 .expiration-container {
-    flex: 1;
-    margin-left: 0.6em;
-    width: 40%;
+  flex: 1;
+  margin-left: 0.6em;
+  width: 40%;
 }
 
 .order-details-container {
-    display: flex;
-    /* justify-content: center; */
+  display: flex;
+  /* justify-content: center; */
 }
 
 .image-container {
-    padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .quantity-container {
-    flex: 1;
-    margin-right: 0.6em;
+  flex: 1;
+  margin-right: 0.6em;
 }
 
 .price-container {
-    flex: 1;
-    margin-left: 0.6em;
+  flex: 1;
+  margin-left: 0.6em;
 }
 
 .potion-photo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  width: 100%;
 }
 
 .form-title {
-    /* font-size: 32px; */
-    font-size: 2.00em;
-    text-align: center;
-    font-weight: bold;
-    padding-top: 25px;
-    padding-bottom: 30px;
+  /* font-size: 32px; */
+  font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 25px;
+  padding-bottom: 30px;
 }
 
-
 .section-title {
-    font-size: 1.20em;
-    font-weight: bold;
-    padding-bottom: 1.8em;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding-bottom: 1.8em;
 }
 
 input[type=text] {
-    width: 100%;
-    padding: 14px 12px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    /* border: 2px #C8C8C8; */
-    border-color: 0.35em #E0E0E0;
+  width: 100%;
+  padding: 14px 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  /* border: 2px #C8C8C8; */
+  border-color: 0.35em #E0E0E0;
 }
 
 input[type=number] {
-    width: 100%;
-    padding: 14px 12px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    /* border: 2px #C8C8C8; */
-    border-color: 0.35em #E0E0E0;
+  width: 100%;
+  padding: 14px 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  /* border: 2px #C8C8C8; */
+  border-color: 0.35em #E0E0E0;
 }
 
 input[type=email] {
-    width: 100%;
-    padding: 14px 12px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    /* border: 2px #C8C8C8; */
-    border-color: 0.35em #E0E0E0;
+  width: 100%;
+  padding: 14px 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  /* border: 2px #C8C8C8; */
+  border-color: 0.35em #E0E0E0;
 }
 
 input[type=month] {
-    width: 45%;
-    padding: 14px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
+  width: 45%;
+  padding: 14px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
 
 input[type=tel] {
-    width: 100%;
-    padding: 14px 12px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    /* border: 2px #C8C8C8; */
-    border-color: 0.35em #E0E0E0;
+  width: 100%;
+  padding: 14px 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  /* border: 2px #C8C8C8; */
+  border-color: 0.35em #E0E0E0;
 }
 
 .input-label {
-    font-size: 0.70em;
-    color: gray;
+  font-size: 0.7em;
+  color: gray;
 }
 
 input.expiration-input {
-    width: 45%;
+  width: 45%;
 }
 
 .quantity-label {
-    font-size: 0.70em;
-    color: gray;
-    unicode-bidi:bidi-override;
+  font-size: 0.7em;
+  color: gray;
+  unicode-bidi: bidi-override;
 }
 
 .quantity-label span {
-    color: red;
+  color: red;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: black;
-    opacity: 1; /* Firefox */
-    font-weight: lighter;
-    font-size: 0.90em;
+::-moz-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1;
+  /* Firefox */
+  font-weight: lighter;
+  font-size: 0.9em;
+}
+
+:-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1;
+  /* Firefox */
+  font-weight: lighter;
+  font-size: 0.9em;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1;
+  /* Firefox */
+  font-weight: lighter;
+  font-size: 0.9em;
 }
 
 button {
-    background-color: #2b605b;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    text-align: center;
-    padding: 15px 32px;
-    font-size: 0.65em;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  background-color: #2b605b;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  padding: 15px 32px;
+  font-size: 0.65em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .divider {
-    padding-top: 1.0em;
-    padding-bottom: 2.0em;
-    color: #DCDCDC;
+  padding-top: 1em;
+  padding-bottom: 2em;
+  color: #DCDCDC;
 }
 
-
 .form-success {
-    color: #155724;
-    text-align: center;
+  color: #155724;
+  text-align: center;
 }
 
 .success-bottom {
-    padding-bottom: 2.0em;
+  padding-bottom: 2em;
 }
 
 .error-message {
-    color: #721C24;
-    border-radius: 5px;
-    padding-left: 2.0em;
-    padding-right: 2.0em;
+  color: #721C24;
+  border-radius: 5px;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .errors-bottom {
-    padding-bottom: 2.0em;
-    border-radius: 5px;
+  padding-bottom: 2em;
+  border-radius: 5px;
 }
