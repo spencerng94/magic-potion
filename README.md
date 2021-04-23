@@ -1,5 +1,7 @@
 # Magic Potion 
 
+## Background
+
 Magic Potion is a product ordering form application that sends a successful POST request upon submission with valid data entry. 
 
 * **DATA SCHEMA:** This application uses a [**SQLite**](https://www.sqlite.org/index.html "SQLite") database and contains two schemas: `users` and `payments`. Upon a successful order, a `user` will submit an `email`, `quantity`, `total` (price), and an `id` will be automatically generated. In the same order, a `payment` will submit a `ccNum` (credit card number),an `exp` (expiration date), a `user_id` that references the one generated in the `users` table, and an automatically generated `id`. This schema allows data to be organized in a relational manner to easily find the relationship between a `user` and their (multiple) `payments`.
@@ -50,4 +52,6 @@ php artisan serve
 A user can fill out a form and fill out the fields with a valid `quantity` (max: 3), `email` address, `ccNum` (credit card number), and `exp` (credit card expiration date). The `total` cost for the potions will automatically be calculated and applied upon a valid `quantity` entry.
 
 - **App Startup:** The form will display as a SPA (Single Page Application) as shown with the aforementioned input fields. 
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Errors.png"/>
+<p alight="right">
+ <img width="150" src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Errors.png"/>
+</p>
