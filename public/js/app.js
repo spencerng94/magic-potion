@@ -2338,10 +2338,10 @@ var FormErrors = function FormErrors(props) {
       showErrors = props.showErrors,
       duplicateEmail = props.duplicateEmail;
   var matchObject = {
-    validCcNum: "Credit Card Number",
-    validEmail: "Email Address",
-    validExp: "Credit Card Expiration Date",
-    validQuantity: "Potion Quantity"
+    validCcNum: "Please enter a valid Credit Card Number",
+    validEmail: "Please enter a valid Email Address",
+    validExp: "credit card Expiration Date is invalid",
+    validQuantity: "Magic potion order may not exceed maximum quantity"
   };
   var allErrors = formErrors;
   allErrors.duplicateEmail = duplicateEmail;
@@ -2357,7 +2357,7 @@ var FormErrors = function FormErrors(props) {
           if (currentField === false && fieldName !== "duplicateEmail") {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "error-message",
-              children: ["Error: Invalid ", matchObject[fieldName], "."]
+              children: ["Error: ", matchObject[fieldName], "."]
             });
           } else if (fieldName === "duplicateEmail" && !duplicateEmail) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
