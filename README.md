@@ -56,13 +56,13 @@ A user can fill out a form and fill out the fields with a valid `quantity` (max:
 - **Order Error:** The form will notify the user that the Order failed and to address an invalid input or a duplicate email error via a notification above "Your Order".
 
 <p float="left">
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Untouched.png" width="300" height="600"/>
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Success.png" width="300" height="600"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Untouched.png" width="320" height="650"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Success.png" width="320" height="650"/>
 </p>
 
 <p float="left">
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Errors.png" width="300" height="600"/>
- <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Duplicates.png" width="300" height="600"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Errors.png" width="320" height="650"/>
+ <img src="https://magic-potion-bucket.s3-us-west-1.amazonaws.com/Duplicate.png" width="320" height="650"/>
 </p>
 
 ## POST Order
